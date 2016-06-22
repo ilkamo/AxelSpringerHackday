@@ -55,12 +55,12 @@ class CompletedtView(View):
     
 class RecommendView(View):
     
-    def get(self, request, article_id):
+    def get(self, request):
         
         history = [v[0] for v in UserArticleHistory.objects.filter(user_id='1').values_list('article_id')]
         importer = ArticleImporter(Parameters.URL, Parameters.AUTH, Parameters.CATEGORIES, history)
-        articles = importer.get_recommended_article('1')
-        UserArticleHistory.objects.create(user_id='1', article_id=article_id, interaction=InteractionType.RECOMMENDED)
+        articles = importer.get_recommended_article('2')
+#         UserArticleHistory.objects.create(user_id='1', article_id=article_id, interaction=InteractionType.RECOMMENDED)
       
         return HttpResponse(articles)
 
